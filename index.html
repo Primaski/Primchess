@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Chess</title>
+        <link href="styles.css" rel="stylesheet" type="text/css"/>
+        <script>
+            if(!window.console) console =
+                {log: function() {}};
+        </script>
+    </head>
+    <body>
+        <header>
+            <h3>PrimChess</h3>
+        </header>
+        <div id="FenDiv">
+            Fen Code:
+            <input type = "text" id="fenstr" 
+            placeholder="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"/>
+            <button type = "button" id = "setFen">
+                Go
+            </button>
+        </div>
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/defs.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/board.js"></script>
+        <script src="js/captures.js"></script>
+        <script src="js/gui.js"></script>
+        <script src="js/io.js"></script>
+        <script src="js/movegen.js"></script>
+        <script src="js/makemove.js"></script>
+    </body>
+</html>
