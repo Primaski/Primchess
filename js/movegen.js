@@ -61,7 +61,9 @@ Board.moveList[index] ->
 
 function GenerateMoves(){
     //new ply
+    console.log("new ply");
     Board.aiPlyStart[Board.aiPlyNo + 1] = Board.aiPlyStart[Board.aiPlyNo];
+    console.log(Board.aiPlyStart.toString());
     DeterminePawnMoves();
     DetermineKnightMoves();
     DetermineBishopMoves();
@@ -75,7 +77,7 @@ function DeterminePawnMoves(){
     var sq, moveTo, attackMoveTo;
     var locations = [];
     var pType = (Board.side == COLOR.WHITE) ? PIECES.wpawn : PIECES.bpawn;
-    var forward = (Board.side == COLOR.WHITE) ? 10 : -10;
+    var forward = (Board.side == COLOR.WHITE) ? -10 : 10;
     var pawnDoubleMoveRank = (Board.side == COLOR.WHITE) ? RANKS.rank2 : RANKS.rank7;
     var enemyColor = (Board.side == COLOR.WHITE) ? COLOR.BLACK : COLOR.WHITE;
 
@@ -299,7 +301,7 @@ function DetermineCastleMoves(){
                 if(!IsSquareAttacked(KEYSQUARES.E8, COLOR.WHITE) &&
                    !IsSquareAttacked(KEYSQUARES.F8, COLOR.WHITE) &&
                    !IsSquareAttacked(KEYSQUARES.G8, COLOR.WHITE)){
-                    AddQuietMove( MOVE(SQUARES.E8, SQUARES.G8, PIECES.NONE, 
+                    AddQuietMove( MOVE(KEYSQUARES.E8, KEYSQUARES.G8, PIECES.NONE, 
                         PIECES.NONE, FLAG_CASTLE ) );
                 }
             } 
@@ -314,7 +316,7 @@ function DetermineCastleMoves(){
                 if(!IsSquareAttacked(KEYSQUARES.C8, COLOR.WHITE) &&
                    !IsSquareAttacked(KEYSQUARES.D8, COLOR.WHITE) &&
                    !IsSquareAttacked(KEYSQUARES.E8, COLOR.WHITE)){
-                    AddQuietMove( MOVE(SQUARES.E8, SQUARES.C8, PIECES.NONE, 
+                    AddQuietMove( MOVE(KEYSQUARES.E8, KEYSQUARES.C8, PIECES.NONE, 
                         PIECES.NONE, FLAG_CASTLE ) );
                 }
             } 

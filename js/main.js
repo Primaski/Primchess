@@ -1,15 +1,20 @@
 $(document).ready(function() {
     init();
-    //PrintMoveList();
-    //PrintPieceLists();
-    //CheckBoard();
+    //ParseFEN(START_FEN);
+    //comp();
+    //revert();
 });
 
 function comp(){
     //ParseFEN(START_FEN);
-    PrintBoard();
     GenerateMoves();
     MakeMove(Board.aiMoveList[Math.floor(Math.random() * Board.aiMoveList.length)]);
+    PrintBoard();
+    CheckBoard();
+}
+
+function revert(){
+    RevertLatestMove();
     PrintBoard();
     CheckBoard();
 }
@@ -19,7 +24,6 @@ function init(){
     hashkeysinit();
     sq120to64init();
     boardvarsinit();
-    GenerateMoves();
 }
 
 function boardvarsinit(){

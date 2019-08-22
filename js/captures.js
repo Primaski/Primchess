@@ -1,21 +1,22 @@
-function IsSquareAttacked(sq, attackedBy){
-    
+function IsSquareAttacked(sq, attackedBy, det = false){
+    //console.log("aB: " + attackedBy);
     if(
-        IsPawnAttacking(sq,attackedBy) || IsKnightAttacking(sq,attackedBy) ||
-        IsBishopAttacking(sq,attackedBy) || IsRookAttacking(sq,attackedBy) ||
-        IsQueenAttacking(sq,attackedBy) || IsKingAttacking(sq,attackedBy)){
+        IsPawnAttacking(sq,attackedBy,det) || IsKnightAttacking(sq,attackedBy,det) ||
+        IsBishopAttacking(sq,attackedBy,det) || IsRookAttacking(sq,attackedBy,det) ||
+        IsQueenAttacking(sq,attackedBy,det) || IsKingAttacking(sq,attackedBy,det)){
         return true;
     }
     return false;
 }
 
 /* NON-SLIDING PIECES */
-function IsPawnAttacking(s, aB){
+function IsPawnAttacking(s, aB, det){
     attacking = false;
     enemy = (aB == COLOR.WHITE) ? PIECES.wpawn : PIECES.bpawn;
     dirPawn.some(function(dir){
         dir = (aB == COLOR.WHITE) ? -dir : dir; //can only attack in one direction
         if(Board.pieces[s+dir] == enemy){
+            if(det) console.log("the pawn at " + GetFileRank(s+dir) + " is attacking.");
             return attacking = true;
         }
     });
@@ -23,11 +24,12 @@ function IsPawnAttacking(s, aB){
     return attacking;
 }
 
-function IsKnightAttacking(s, aB){
+function IsKnightAttacking(s, aB, det){
     attacking = false;
     enemy = (aB == COLOR.WHITE) ? PIECES.wknight : PIECES.bknight;
     dirKnight.some(function(dir){
         if(Board.pieces[s+dir] == enemy){
+            if(det) console.log("the knight at " + GetFileRank(s) + " is attacking.");
             return attacking = true;
         }
     });
@@ -35,11 +37,12 @@ function IsKnightAttacking(s, aB){
     return attacking;
 }
 
-function IsKingAttacking(s, aB){
+function IsKingAttacking(s, aB, det){
     attacking = false;
     enemy = (aB == COLOR.WHITE) ? PIECES.wking : PIECES.bking;
     dirKing.some(function(dir){
         if(Board.pieces[s+dir] == enemy){
+            if(det) console.log("the king at " + GetFileRank(s) + " is attacking.");
             return attacking = true;
         }
     });
@@ -48,7 +51,7 @@ function IsKingAttacking(s, aB){
 }
 
 /* SLIDING PIECES */
-function IsBishopAttacking(s, aB){
+function IsBishopAttacking(s, aB, det){
     attacking = false;
     enemy = (aB == COLOR.WHITE) ? PIECES.wbishop : PIECES.bbishop;
     dirBishop.some(function(dir){
@@ -59,6 +62,7 @@ function IsBishopAttacking(s, aB){
             //sliding pieces traverse until contact with another piece
             if(attackingSquare != PIECES.NONE){
                 if(attackingSquare == enemy){
+                    if(det) console.log("the bishop at " + GetFileRank(s) + " is attacking.");
                     return attacking = true;
                 }
                 break; //contact made
@@ -71,7 +75,7 @@ function IsBishopAttacking(s, aB){
     return attacking;
 }
 
-function IsRookAttacking(s, aB){
+function IsRookAttacking(s, aB, det){
     attacking = false;
     enemy = (aB == COLOR.WHITE) ? PIECES.wrook : PIECES.brook;
     dirRook.some(function(dir){
@@ -82,6 +86,7 @@ function IsRookAttacking(s, aB){
             //sliding pieces traverse until contact with another piece
             if(attackingSquare != PIECES.NONE){
                 if(attackingSquare == enemy){
+                    if(det) console.log("the rook at " + GetFileRank(s) + " is attacking.");
                     return attacking = true;
                 }
                 break; //contact made
@@ -94,7 +99,7 @@ function IsRookAttacking(s, aB){
     return attacking;
 }
 
-function IsQueenAttacking(s, aB){
+function IsQueenAttacking(s, aB, det){
     attacking = false;
     enemy = (aB == COLOR.WHITE) ? PIECES.wqueen : PIECES.bqueen;
     dirQueen.some(function(dir){
@@ -105,6 +110,10 @@ function IsQueenAttacking(s, aB){
             //sliding pieces traverse until contact with another piece
             if(attackingSquare != PIECES.NONE){
                 if(attackingSquare == enemy){
+                    if(det) console.log("space in danger is " + GetFileRank(s));
+                    if(det) console.log("attacked by color is " + COLOR[aB]);
+                    if(det) console.log("the queen at " + GetFileRank(s+localDir) + " is attacking.");
+                    if(det) console.log("the queen is " + aB + ", piece aff " + PIECECHAR[enemy]);
                     return attacking = true;
                 }
                 break; //contact made

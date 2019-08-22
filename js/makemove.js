@@ -35,11 +35,17 @@ function MakeMove(move){
     HASH_CASTLE(); //hash out castle
 
     //store previous move data
+    try{
     Board.history[Board.currHistoryPly].move = move;
     Board.history[Board.currHistoryPly].fiftyMove = Board.fiftyMove;
     Board.history[Board.currHistoryPly].enPas = Board.enPassant;
     Board.history[Board.currHistoryPly].castlePerm = Board.castlePerm;
-
+    }catch(error){
+        console.log(error);
+        console.log(Board.history.length + " leng");
+        console.log(Board.currHistoryPly + " histply");
+        throw error;
+    }
     //update castle perms (bitwise and only affects rooks and kings)
     Board.castlePerm &= CastlePerm[to];
     Board.castlePerm &= CastlePerm[from];
@@ -77,8 +83,10 @@ function MakeMove(move){
     Board.side ^= 1;
     HASH_SIDE();
 
-    if(IsSquareAttacked(Board.indexByPieceType[ PieceIndex( (Kings[side ^ 1] ),0) ],
-       Board.side)){
+    //console.log("BOARD SIDE IS " + Board.side);
+    if(IsSquareAttacked(Board.indexByPieceType[PieceIndex(Kings[side],0)], Board.side, true)){
+        console.log("IsSquareAttacked? " + GetFileRank(Board.indexByPieceType[PieceIndex(Kings[side],0)]));
+        RevertLatestMove();
         //illegal move was attempted - revert
         return false;
     }
@@ -97,20 +105,21 @@ function RevertLatestMove(){
     if(Board.enPassant != 0){
         HASH_EN_PASSANT(); //moved in
     }
-    HASH_CASTLE();
+    HASH_CASTLE(); //hash in
 
     Board.castlePerm = Board.history[Board.currHistoryPly].castlePerm;
     Board.fiftyMove = Board.history[Board.currHistoryPly].fiftyMove;
-    Board.enPas = Board.history[Board.currHistoryPly].enPas;
+    Board.enPassant = Board.history[Board.currHistoryPly].enPas;
 
-    if(Board.enPas != 0){
+    if(Board.enPassant != 0){
         HASH_EN_PASSANT(); //moved out
     }
+    HASH_CASTLE(); //hash out
 
     Board.side ^= 1;
     HASH_SIDE();
-    var dir = (side == COLOR.WHITE)? -10 : 10;
-    var enpa = (side == COLOR.WHITE)? PIECES.bpawn : PIECES.wpawn;
+    var dir = (Board.side == COLOR.WHITE)? -10 : 10;
+    var enpa = (Board.side == COLOR.WHITE)? PIECES.bpawn : PIECES.wpawn;
 
     if(MoveIsEnPassant(move)){
         AddPiece(to+dir, enpa);
@@ -141,11 +150,9 @@ function RevertLatestMove(){
 
     if(MoveIsPromotion(move)){
         ClearPiece(from);
-        //AddPiece(from, )
+        AddPiece(from, ((PIECECOLOR[MovePromoted(move)]) ? PIECES.wpawn : PIECES.bpawn));  
     }
 
-
-    /** UNFINISHED, DO NOT USE YET! **/
 }
 
 //remove piece from square
