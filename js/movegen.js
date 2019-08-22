@@ -291,7 +291,7 @@ function DetermineCastleMoves(){
         }
     }else{
         //do you have permission to kingside castle?
-        if(Board.castlePerm & CASTLEBIT.BK){
+        if(Board.castlePerm & CASTLEBIT.bk){
             //is your path to the rook clear?
             if(Board.pieces[KEYSQUARES.F8] == PIECES.NONE && 
                Board.pieces[KEYSQUARES.G8] == PIECES.NONE){

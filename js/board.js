@@ -93,7 +93,6 @@ function UpdateMaterial(){
         sq = ToSQ120(i);
         piece = Board.pieces[ToSQ120(i)];
         if(!(piece == PIECES.NONE)){
-            /* TO-DO, WHERE I LEFT OFF - END OF LESSON 15 */
             //console.log("piece " + piece + " on " + sq);
             color = PIECECOLOR[piece];
             Board.material[color] += pieceVal[piece];
