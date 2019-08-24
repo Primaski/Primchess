@@ -67,6 +67,7 @@ function MakeMove(move){
 
     if(isPawn[Board.pieces[from]]){
         Board.halfMoveClock = 0;
+        if(from == 81){ debugger; }
         if(MoveIsEnPassant(move)){
             Board.enPassant = (from + dir);
         }

@@ -18,30 +18,19 @@ function RunPerftTest(depth){
     pLeafNodes = 0;
     var move;
     var moveNo = 0;
-    //debugger;
     GenerateMoves();
-    console.log("A");
-    console.log("i: " + Board.aiPlyStart[Board.aiPlyNo]);
-    console.log("i < " + Board.aiPlyStart[Board.aiPlyNo + 1]);
-    console.log("aiPlyNo: " + Board.aiPlyNo);
 
     for(let i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo + 1]; i++){
         //debugger;
         move = Board.aiMoveList[i];
-        var uwu = MakeMove(move);
-        if(!uwu){
-            console.log("failed, returning.");
-            return;
-        }
-        if(uwu){
+        if(MakeMove(move)){
             moveNo++;
             var cumulative = pLeafNodes;
             Perft(depth-1);
             RevertLatestMove();
             var oldNodes = pLeafNodes - cumulative;
-            console.log("Move " + moveNo + " " + PrintMove(move) + " " + oldNodes);
+            console.log(moveNo.toString().padStart(2,'0') + " " + PrintMove(move) + ": " + oldNodes);
         }
-        //debugger;
     }
     console.log("Test complete: " + pLeafNodes + " leaf nodes visited.");
 }

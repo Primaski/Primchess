@@ -1,0 +1,195 @@
+go perft 5 ->
+a2a3: 181046 |
+b2b3: 215255 |
+c2c3: 222861 |
+d2d3: 328511 |
+e2e3: 402988 |
+f2f3: 178889 |
+g2g3: 217210 |
+h2h3: 181044 |
+a2a4: 217832 . (-19)
+b2b4: 216145 . (-35)
+c2c4: 240082 . (-38)
+d2d4: 361790 . (-37)
+e2e4: 405385 . (-37)
+f2f4: 198473 . (-38)
+g2g4: 214048 . (-35)
+h2h4: 218829 . (-19)
+b1a3: 198572 |
+b1c3: 234656 |
+g1f3: 233491 |
+g1h3: 198502 |
+Nodes searched: 4,865,609 (-258)
+
+based c2c4
+(position fen rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1)
+go perft 4 ->
+a7a6: 10251 . (-2)
+b7b6: 11371 . (-1)
+c7c6: 11290 . (-2)
+d7d6: 14032 . (-1)
+e7e6: 15941 . (-2)
+f7f6: 10265 . (-2)
+g7g6: 11333 . (-2)
+h7h6: 10265 . (-2)
+a7a5: 11273 . (-2)
+b7b5: 12691 . (-3)
+c7c5: 10501 |
+d7d5: 16102 . (-3)
+e7e5: 15967 . (-2)
+f7f5: 10798 . (-2)
+g7g5: 11335 . (-2)
+h7h5: 11333 . (-2)
+b8a6: 10757 . (-2)
+b8c6: 11925 . (-2)
+g8f6: 11868 . (-2)
+g8h6: 10784 . (-2)
+Nodes searched: 240,082 (-38)
+
+based b7b5
+(position fen rnbqkbnr/p1pppppp/8/1p6/2P5/8/PP1PPPPP/RNBQKBNR w KQkq - 0 1)
+go perft 3 ->
+a2a3: 481 |
+b2b3: 481 |
+d2d3: 656 |
+e2e3: 657 |
+f2f3: 480 |
+g2g3: 524 |
+h2h3: 480 |
+c4c5: 439 . (-1)
+a2a4: 544 |
+b2b4: 484 |
+d2d4: 678 |
+e2e4: 658 |
+f2f4: 503 |
+g2g4: 525 |
+h2h4: 524 |
+c4b5: 447 . (-2)
+b1a3: 503 |
+b1c3: 590 |
+g1f3: 546 |
+g1h3: 502 |
+d1c2: 654 |
+d1b3: 682 |
+d1a4: 653 |
+Nodes searched: 12691 (-3)
+
+based c4b5
+(position fen  rnbqkbnr/p1pppppp/8/1P6/8/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1)
+go perft 2 ->
+a7a6: 23 |
+c7c6: 23 |
+d7d6: 22 |
+e7e6: 22 |
+f7f6: 22 |
+g7g6: 22 |
+h7h6: 22 |
+a7a5: 23 . (-1)
+c7c5: 23 . (-1)
+d7d5: 22 |
+e7e5: 22 |
+f7f5: 22 |
+g7g5: 22 |
+h7h5: 22 |
+b8a6: 23 |
+b8c6: 23 |
+g8f6: 22 |
+g8h6: 22 |
+c8a6: 23 |
+c8b7: 22 |
+
+Nodes searched: 447 (-2)
+
+based a7a5
+(position fen rnbqkbnr/2pppppp/8/pP6/8/8/PP1PPPPP/RNBQKBNR w KQkq a6 0 1)
+go perft 1 ->
+a2a3: 1 |
+b2b3: 1 |
+d2d3: 1 |
+e2e3: 1 |
+f2f3: 1 |
+g2g3: 1 |
+h2h3: 1 |
+b5b6: 1 |
+a2a4: 1 |
+b2b4: 1 |
+d2d4: 1 |
+e2e4: 1 |
+f2f4: 1 |
+g2g4: 1 |
+h2h4: 1 |
+b5a6: 1 . (-1)
+b1a3: 1 |
+b1c3: 1 |
+g1f3: 1 |
+g1h3: 1 |
+d1c2: 1 |
+d1b3: 1 |
+d1a4: 1 |
+
+Nodes searched: 23
+RESULT: EN PASSANT NOT ACCOUNTED (W C. B)
+
+________________________
+________________________
+
+FIXED
+
+recurse out
+
+based a7a5
+(position fen rnbqkbnr/2pppppp/8/pP6/8/8/PP1PPPPP/RNBQKBNR w KQkq a6 0 1)
+go perft 1 ->
+a2a3: 1 |
+b2b3: 1 |
+d2d3: 1 |
+e2e3: 1 |
+f2f3: 1 |
+g2g3: 1 |
+h2h3: 1 |
+b5b6: 1 |
+a2a4: 1 |
+b2b4: 1 |
+d2d4: 1 |
+e2e4: 1 |
+f2f4: 1 |
+g2g4: 1 |
+h2h4: 1 |
+b5a6: 1 |
+b1a3: 1 |
+b1c3: 1 |
+g1f3: 1 |
+g1h3: 1 |
+d1c2: 1 |
+d1b3: 1 |
+d1a4: 1 |
+
+Nodes searched: 23
+
+based c4b5
+(position fen  rnbqkbnr/p1pppppp/8/1P6/8/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1)
+go perft 2 ->
+a7a6: 23 |
+c7c6: 23 |
+d7d6: 22 |
+e7e6: 22 |
+f7f6: 22 |
+g7g6: 22 |
+h7h6: 22 |
+a7a5: 23 . (-1)
+c7c5: 23 . (-1)
+d7d5: 22 |
+e7e5: 22 |
+f7f5: 22 |
+g7g5: 22 |
+h7h5: 22 |
+b8a6: 23 |
+b8c6: 23 |
+g8f6: 22 |
+g8h6: 22 |
+c8a6: 23 |
+c8b7: 22 |
+
+Nodes searched: 447 (-2)
+
+PROBLEM: En Passant reads fine from FEN, but not in move determination.

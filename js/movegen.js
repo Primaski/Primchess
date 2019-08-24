@@ -79,12 +79,14 @@ function DeterminePawnMoves(){
     //determine moves for pawn
     locations.forEach(function(moveFrom){
         moveTo = moveFrom + forward;
-
         //non-attacking - directly forward
         if(Board.pieces[moveTo] == PIECES.NONE){
+            if(moveFrom == 81){ debugger; }
             if(ranksBoard[moveFrom] == pawnDoubleMoveRank && 
                 Board.pieces[moveFrom + forward * 2] == PIECES.NONE){
-                    AddQuietMove( MOVE(moveFrom, (moveFrom + forward*2), PIECES.NONE, PIECES.NONE, FLAG_PAWNSTART) );
+                    /* TO-DO: WHERE I LEFT OFF -> SHIFTED ADDQUIETMOVE TO ADDENPASSANT BUT UNEXPECTED INFLUX IN LEAF NODE COUNT */
+                    //AddEnPassantMove( MOVE(moveFrom, (moveFrom + forward*2), PIECES.NONE, PIECES.NONE, FLAG_ENPASSANT) );
+                    AddQuietMove( MOVE(moveFrom, (moveFrom + forward * 2), PIECES.NONE, PIECES.NONE, FLAG_PAWNSTART));
                     //console.log("quiet move for " + GetFileRank(moveFrom) + " is possible");
             }
             if((ranksBoard[moveFrom] == RANKS.rank7 && ranksBoard[moveTo] == RANKS.rank8) ||
@@ -93,7 +95,6 @@ function DeterminePawnMoves(){
             }
             AddQuietMove( MOVE(moveFrom, moveTo) );
             //console.log("standard move for " + GetFileRank(moveFrom) + " is possible");
-                    
         }
 
         //attacking
@@ -109,12 +110,6 @@ function DeterminePawnMoves(){
                     AddCaptureMove( MOVE(moveFrom, attackMoveTo, Board.pieces[attackMoveTo]) );
                     //console.log("pawn can capture from " + GetFileRank);
                 }
-            }
-
-            if(attackMoveTo == Board.enPassant){
-                AddEnPassantMove( MOVE(moveFrom, attackMoveTo, PIECES.NONE,
-                    PIECES.NONE, FLAG_ENPASSANT) );
-                //console.log("enpassant move for " + GetFileRank(moveFrom) + " is possible");
             }
         });
     });
@@ -227,13 +222,18 @@ function DetermineKingMoves(){
     var piece = (Board.side == COLOR.WHITE) ? PIECES.wking : PIECES.bking;
     var enemyColor = (Board.side == COLOR.WHITE) ? COLOR.BLACK : COLOR.WHITE;
 
+    /*if(Board.aiPlyNo == 2 && Board.pieces[45] != PIECES.NONE){
+        console.log(PIECECHAR[Board.pieces[45]]);
+        debugger;
+    }*/
+
     for(pceNo = 0; pceNo < Board.pieceCount[piece]; pceNo++){
         sq = Board.indexByPieceType[PieceIndex(piece, pceNo)];
         for(let i = 0; i < dirCountByPiece[piece]; i++){
             dir = dirKing[i];
             moveTo = sq + dir;
 
-            if(!IsSquareOffboard){
+            if(!IsSquareOffboard(moveTo)){
                 if(IsSquareAttacked(moveTo,enemyColor)){
                     continue; //can't move into check
                 }

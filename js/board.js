@@ -208,8 +208,9 @@ function ParseFEN(fen){
         
         if(fen[localindex] != '-'){            
             try{
-                file = fen[localindex].charCodeAt() - 'a'.charCodeAt();
-                rank = parseInt(fen[++localindex], 10) - 1;
+                file = fen[localindex].charCodeAt() - 'a'.charCodeAt() + 1;
+                rank = parseInt(fen[++localindex], 10);
+                console.log("o: " + file + ", " + rank);
                 Board.enPassant = GetSquareIndex(file,rank);
             }catch(enPassantError){
                 throw ("Unexpected char: " + enPassantError + " in enPassant perms.");
