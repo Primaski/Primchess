@@ -1,6 +1,7 @@
 $(document).ready(function() {
     init();
-    //ParseFEN(START_FEN);
+    ParseFEN(START_FEN);
+    PrintBoard();
     //comp();
     //revert();
 });

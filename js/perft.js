@@ -10,7 +10,7 @@ is producing the expected results.
 
 var pLeafNodes;
 
-/*
+
 //DO NOT RUN YET, MAJOR BUG CAUSES BOARD.AIPLYSTART[] TO BE UPDATED INFINITELY, STOPS UPON 2048 ITERATIONS
 function RunPerftTest(depth){
     PrintBoard();
@@ -18,7 +18,7 @@ function RunPerftTest(depth){
     pLeafNodes = 0;
     var move;
     var moveNo = 0;
-    
+    //debugger;
     GenerateMoves();
     console.log("A");
     console.log("i: " + Board.aiPlyStart[Board.aiPlyNo]);
@@ -26,32 +26,29 @@ function RunPerftTest(depth){
     console.log("aiPlyNo: " + Board.aiPlyNo);
 
     for(var i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo + 1]; i++){
+        //debugger;
         move = Board.aiMoveList[i];
-        console.log("B");
         var uwu = MakeMove(move);
-        console.log(uwu.toString());
         if(!uwu){
             console.log("failed, returning.");
             return;
         }
         if(uwu){
-            console.log("C");
             moveNo++;
             var cumulative = pLeafNodes;
             Perft(depth-1);
-            TakeMove();
+            RevertLatestMove();
             var oldNodes = pLeafNodes - cumulative;
             console.log("Move " + moveNo + " " + PrintMove(move) + " " + oldNodes);
         }
-        console.log("Test complete: " + pLeafNodes + " leaf nodes visited.");
+        //debugger;
     }
-    console.log("reached outer");
+    console.log("Test complete: " + pLeafNodes + " leaf nodes visited.");
 }
 
 //recursive
 function Perft(depth){
-    if(depth == 0){
-        console.log("is 0");
+    if(depth <= 0){
         //base - arrival here implies a leaf node
         pLeafNodes++; return;
     }
@@ -62,11 +59,10 @@ function Perft(depth){
     for(var i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo+1]; i++){
         move = Board.aiMoveList[i];
         if(MakeMove(move)){
-            Perft(--depth);
+            Perft(depth-1);
             RevertLatestMove();
         }
     }
 
     return;
 }
-*/

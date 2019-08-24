@@ -37,7 +37,7 @@ function MakeMove(move){
     //store previous move data
     try{
     Board.history[Board.currHistoryPly].move = move;
-    Board.history[Board.currHistoryPly].fiftyMove = Board.fiftyMove;
+    Board.history[Board.currHistoryPly].fiftyMove = Board.halfMoveClock;
     Board.history[Board.currHistoryPly].enPas = Board.enPassant;
     Board.history[Board.currHistoryPly].castlePerm = Board.castlePerm;
     }catch(error){
@@ -56,17 +56,17 @@ function MakeMove(move){
     //hash in
     HASH_CASTLE();
 
-    Board.fiftyMove += 1;
+    Board.halfMoveClock += 1;
     if(MoveIsCapture(move)){
         ClearPiece(to);
-        Board.fiftyMove = 0;
+        Board.halfMoveClock = 0;
     }
 
     Board.aiPlyNo += 1;
     Board.currHistoryPly += 1;
 
     if(isPawn[Board.pieces[from]]){
-        Board.fiftyMove = 0;
+        Board.halfMoveClock = 0;
         if(MoveIsEnPassant(move)){
             Board.enPassant = (from + dir);
         }
@@ -84,8 +84,8 @@ function MakeMove(move){
     HASH_SIDE();
 
     //console.log("BOARD SIDE IS " + Board.side);
-    if(IsSquareAttacked(Board.indexByPieceType[PieceIndex(Kings[side],0)], Board.side, true)){
-        console.log("IsSquareAttacked? " + GetFileRank(Board.indexByPieceType[PieceIndex(Kings[side],0)]));
+    if(IsSquareAttacked(Board.indexByPieceType[PieceIndex(Kings[side],0)], Board.side)){
+        //console.log("IsSquareAttacked? " + GetFileRank(Board.indexByPieceType[PieceIndex(Kings[side],0)]));
         RevertLatestMove();
         //illegal move was attempted - revert
         return false;
@@ -108,7 +108,7 @@ function RevertLatestMove(){
     HASH_CASTLE(); //hash in
 
     Board.castlePerm = Board.history[Board.currHistoryPly].castlePerm;
-    Board.fiftyMove = Board.history[Board.currHistoryPly].fiftyMove;
+    Board.halfMoveClock = Board.history[Board.currHistoryPly].fiftyMove;
     Board.enPassant = Board.history[Board.currHistoryPly].enPas;
 
     if(Board.enPassant != 0){

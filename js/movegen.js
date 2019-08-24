@@ -6,35 +6,26 @@ function MOVE(from, to, captured = PIECES.NONE, promoted = PIECES.NONE, flag = 0
 
 function AddCaptureMove(move){
     //end of moveList Index
+    /*
     var newMoveIndex = Board.aiPlyStart[Board.aiPlyNo + 1];
 
     Board.aiMoveList[newMoveIndex] = move;
     Board.aiMoveScores[newMoveIndex] = 0;
 
     //move was added, increment moveList Index
-    Board.aiPlyStart[Board.aiPlyNo + 1]++;
+    Board.aiPlyStart[Board.aiPlyNo + 1]++; */
+    Board.aiMoveList[Board.aiPlyStart[Board.aiPlyNo+1]] = move;
+    Board.aiMoveScores[Board.aiPlyStart[Board.aiPlyNo+1]++] = 0;
 }
 
 function AddQuietMove(move){
-    //end of moveList Index
-    var newMoveIndex = Board.aiPlyStart[Board.aiPlyNo + 1];
-
-    Board.aiMoveList[newMoveIndex] = move;
-    Board.aiMoveScores[newMoveIndex] = 0;
-
-    //move was added, increment moveList Index
-    Board.aiPlyStart[Board.aiPlyNo + 1]++;
+    Board.aiMoveList[Board.aiPlyStart[Board.aiPlyNo+1]] = move;
+    Board.aiMoveScores[Board.aiPlyStart[Board.aiPlyNo+1]++] = 0;  
 }
 
 function AddEnPassantMove(move){
-    //end of moveList Index
-    var newMoveIndex = Board.aiPlyStart[Board.aiPlyNo + 1];
-
-    Board.aiMoveList[newMoveIndex] = move;
-    Board.aiMoveScores[newMoveIndex] = 0;
-
-    //move was added, increment moveList Index
-    Board.aiPlyStart[Board.aiPlyNo + 1]++;
+    Board.aiMoveList[Board.aiPlyStart[Board.aiPlyNo+1]] = move;
+    Board.aiMoveScores[Board.aiPlyStart[Board.aiPlyNo+1]++] = 0;
 }
 
 function AddPromotionMove(from, to, capturing = PIECES.NONE){
@@ -61,9 +52,7 @@ Board.moveList[index] ->
 
 function GenerateMoves(){
     //new ply
-    console.log("new ply");
     Board.aiPlyStart[Board.aiPlyNo + 1] = Board.aiPlyStart[Board.aiPlyNo];
-    console.log(Board.aiPlyStart.toString());
     DeterminePawnMoves();
     DetermineKnightMoves();
     DetermineBishopMoves();
@@ -77,7 +66,7 @@ function DeterminePawnMoves(){
     var sq, moveTo, attackMoveTo;
     var locations = [];
     var pType = (Board.side == COLOR.WHITE) ? PIECES.wpawn : PIECES.bpawn;
-    var forward = (Board.side == COLOR.WHITE) ? -10 : 10;
+    var forward = (Board.side == COLOR.WHITE) ? 10 : -10;
     var pawnDoubleMoveRank = (Board.side == COLOR.WHITE) ? RANKS.rank2 : RANKS.rank7;
     var enemyColor = (Board.side == COLOR.WHITE) ? COLOR.BLACK : COLOR.WHITE;
 
