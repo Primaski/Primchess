@@ -43,9 +43,9 @@ function PrintSquaresAttackable(onlyShowAttackablePieces = true){
     }
     var sq, piece;
     console.log("Attacked");
-    for(var rank = RANKS.rank8; rank >= RANKS.rank1; rank--){
+    for(let rank = RANKS.rank8; rank >= RANKS.rank1; rank--){
         var line = ((rank) + " ");
-        for(var file = FILES.fileA; file <= FILES.fileH; file++){
+        for(let file = FILES.fileA; file <= FILES.fileH; file++){
             sq = GetSquareIndex(file,rank);
             if(IsSquareAttacked(sq, Board.side)){
                 if(!onlyShowAttackablePieces){
@@ -99,7 +99,7 @@ function PrintMove(move, detailedStats = false){
 function PrintMoveList(detailedStats = true){
     console.log("Move List:");
     var move;
-    for(var i = Board.aiPlyStart[Board.aiPlyNo]; 
+    for(let i = Board.aiPlyStart[Board.aiPlyNo]; 
        i < Board.aiPlyStart[Board.aiPlyNo+1]; i++){
         move = Board.aiMoveList[i];
         console.log(PrintMove(move, detailedStats));

@@ -30,7 +30,7 @@ function init(){
 function boardvarsinit(){
 
     //initalize blank board history arr
-    for(var i = 0; i < MAX_GAME_MOVES; i++){
+    for(let i = 0; i < MAX_GAME_MOVES; i++){
         Board.history.push(new HistoryObject(NOMOVE,0,0,0,0));
     }
 
@@ -42,15 +42,15 @@ function sq120to64init(){
     var sq = KEYSQUARES.A1;
     var sq64 = 0;
 
-    for(var i = 0; i < NO_OF_SQUARES; i++){
+    for(let i = 0; i < NO_OF_SQUARES; i++){
         from120to64Index[i] = 65;
     }
-    for(var i = 0; i < NO_OF_INTERNAL_SQUARES; i++){
+    for(let i = 0; i < NO_OF_INTERNAL_SQUARES; i++){
         from64to120Index[i] = 120;
     }
 
-    for(var rank = RANKS.rank1; rank <= RANKS.rank8; rank++){
-        for(var file = FILES.fileA; file <= FILES.fileH; file++){
+    for(let rank = RANKS.rank1; rank <= RANKS.rank8; rank++){
+        for(let file = FILES.fileA; file <= FILES.fileH; file++){
             sq = GetSquareIndex(file,rank);
             from120to64Index[sq] = sq64;
             from64to120Index[sq64] = sq;
@@ -64,13 +64,13 @@ function sq120to64init(){
 function filerankboardsinit(){
     var currSquare = KEYSQUARES.A1;
     
-    for(var i = 0; i < NO_OF_SQUARES; i++){
+    for(let i = 0; i < NO_OF_SQUARES; i++){
         ranksBoard[i] = KEYSQUARES.ILLEGAL;
         filesBoard[i] = KEYSQUARES.ILLEGAL;
     }
 
-    for(var r = RANKS.rank1; r <= RANKS.rank8; r++){
-        for(var f = FILES.fileA; f <= FILES.fileH; f++){
+    for(let r = RANKS.rank1; r <= RANKS.rank8; r++){
+        for(let f = FILES.fileA; f <= FILES.fileH; f++){
             currSquare = GetSquareIndex(f,r);
             ranksBoard[currSquare] = r;
             filesBoard[currSquare] = f;
@@ -88,14 +88,14 @@ function hashkeysinit(){
     value for every piece/square combination (so, 1,680 of them!)
     defined by function: "pieceVal * NO_OF_SQUARES + squareIndex"
     (see board.GetPositionKey())*/
-    for(var i = 0; 
+    for(let i = 0; 
       i < (13 * NO_OF_SQUARES) + NO_OF_SQUARES; i++){
         pieceKeys[i] = Random32Bit();
     }
     sideKey = Random32Bit();
     
     //16 is number of possible castle keys (by 4 flag bits)
-    for(var i = 0; i < 16; i++){
+    for(let i = 0; i < 16; i++){
         castleKeys[i] = Random32Bit();
     }
 

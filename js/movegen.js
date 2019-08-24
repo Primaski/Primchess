@@ -128,7 +128,7 @@ function DetermineKnightMoves(){
 
     for(pceNo = 0; pceNo < Board.pieceCount[piece]; pceNo++){
         sq = Board.indexByPieceType[PieceIndex(piece, pceNo)];
-        for(var i = 0; i < dirCountByPiece[piece]; i++){
+        for(let i = 0; i < dirCountByPiece[piece]; i++){
             dir = dirKnight[i];
             moveTo = sq + dir;
             if(!IsSquareOffboard(moveTo)){
@@ -151,7 +151,7 @@ function DetermineBishopMoves(){
     
     for(pceNo = 0; pceNo < Board.pieceCount[piece]; pceNo++){
         sq = Board.indexByPieceType[PieceIndex(piece, pceNo)];
-        for(var i = 0; i < dirCountByPiece[piece]; i++){
+        for(let i = 0; i < dirCountByPiece[piece]; i++){
             dir = dirBishop[i];
             moveTo = sq + dir;
 
@@ -177,7 +177,7 @@ function DetermineRookMoves(){
 
     for(pceNo = 0; pceNo < Board.pieceCount[piece]; pceNo++){
         sq = Board.indexByPieceType[PieceIndex(piece, pceNo)];
-        for(var i = 0; i < dirCountByPiece[piece]; i++){
+        for(let i = 0; i < dirCountByPiece[piece]; i++){
             dir = dirRook[i];
             moveTo = sq + dir;
 
@@ -203,7 +203,7 @@ function DetermineQueenMoves(){
 
     for(pceNo = 0; pceNo < Board.pieceCount[piece]; pceNo++){
         sq = Board.indexByPieceType[PieceIndex(piece, pceNo)];
-        for(var i = 0; i < dirCountByPiece[piece]; i++){
+        for(let i = 0; i < dirCountByPiece[piece]; i++){
             dir = dirQueen[i];
             moveTo = sq + dir;
 
@@ -229,7 +229,7 @@ function DetermineKingMoves(){
 
     for(pceNo = 0; pceNo < Board.pieceCount[piece]; pceNo++){
         sq = Board.indexByPieceType[PieceIndex(piece, pceNo)];
-        for(var i = 0; i < dirCountByPiece[piece]; i++){
+        for(let i = 0; i < dirCountByPiece[piece]; i++){
             dir = dirKing[i];
             moveTo = sq + dir;
 

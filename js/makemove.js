@@ -166,7 +166,7 @@ function ClearPiece(sq){
     Board.pieces[sq] = PIECES.NONE;
     Board.material[color] -= pieceVal[piece];
 
-    for(var i = 0; i < Board.pieceCount[piece]; i++){
+    for(let i = 0; i < Board.pieceCount[piece]; i++){
         if(Board.indexByPieceType[PieceIndex(piece,i)] == sq){
             pListIndex = i;
             break;
@@ -201,7 +201,7 @@ function MovePiece(from, to){
 
     Board.pieces[to] = piece;
 
-    for(var i = 0; i < Board.pieceCount[piece]; i++){
+    for(let i = 0; i < Board.pieceCount[piece]; i++){
         if(Board.indexByPieceType[PieceIndex(piece,i)] == from){
             Board.indexByPieceType[PieceIndex(piece,i)] = to;
             break;

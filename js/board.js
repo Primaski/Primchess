@@ -40,7 +40,7 @@ Board.aiPlyStart = []; //type: int, see movegen.js
 function GetPositionKey(){
     currPiece = PIECES.NONE;
     var key = 0;
-    for(var currSq = 0; currSq < NO_OF_SQUARES; currSq++){
+    for(let currSq = 0; currSq < NO_OF_SQUARES; currSq++){
         currPiece = Board.pieces[currSq];
         if(currPiece == PIECES.NONE || currPiece == KEYSQUARES.ILLEGAL){ 
             continue; 
@@ -62,8 +62,8 @@ function GetPositionKey(){
 }
 
 function PrintPieceLists(){
-    for(var piece = PIECES.wpawn; piece <= PIECES.bking; piece++){
-        for(var no = 0; no < Board.pieceCount[piece]; no++){
+    for(let piece = PIECES.wpawn; piece <= PIECES.bking; piece++){
+        for(let no = 0; no < Board.pieceCount[piece]; no++){
             /*console.log("piece and no is " + piece + " and " + no + ",\n" + 
                 "PieceIndex(" + piece + "," + no + ") is " + PieceIndex(piece,no) + ",\n" +
                 "Board.indexByPieceType[" + PieceIndex(piece,no) + "] is " + 
@@ -77,11 +77,11 @@ function PrintPieceLists(){
 
 function UpdateMaterial(){
     
-    for(var i = 0; i < 14 * 10; i++){
+    for(let i = 0; i < 14 * 10; i++){
         Board.indexByPieceType[i] = PIECES.NONE;
     }
 
-    for(var i = 0; i < 13; i++){
+    for(let i = 0; i < 13; i++){
         Board.pieceCount[i] = 0;
     }
 
@@ -89,7 +89,7 @@ function UpdateMaterial(){
     Board.material[1] = 0;
 
     var piece,sq,color;
-    for(var i = 0; i < 64; i++){
+    for(let i = 0; i < 64; i++){
         sq = ToSQ120(i);
         piece = Board.pieces[ToSQ120(i)];
         if(!(piece == PIECES.NONE)){
@@ -109,11 +109,11 @@ function UpdateMaterial(){
 }
 
 function ResetBoard(){
-    for(var i = 0; i < NO_OF_SQUARES; i++){
+    for(let i = 0; i < NO_OF_SQUARES; i++){
         Board.pieces[i] = KEYSQUARES.ILLEGAL;
     }
 
-    for(var i = 0; i < NO_OF_INTERNAL_SQUARES; i++){
+    for(let i = 0; i < NO_OF_INTERNAL_SQUARES; i++){
         Board.pieces[ToSQ120(i)] = PIECES.NONE;
     }
 
@@ -175,7 +175,7 @@ function ParseFEN(fen){
             }
 
             //instill pieces in board, 1 if constant, white space if count
-            for(var i = 0; i < noOfPiecesAffected; i++){
+            for(let i = 0; i < noOfPiecesAffected; i++){
                 Board.pieces[GetSquareIndex(file,rank)] = piece;
                 file++;
             }
@@ -190,7 +190,7 @@ function ParseFEN(fen){
             Board.castlePerm = 0;
             localindex++;
         }else{
-            for(var i = 0; 
+            for(let i = 0; 
                 (i < 4 && fen[localindex] != ' ' && fen[localindex] != '-' ); 
                 i++){
                 switch(fen[localindex]){
@@ -260,7 +260,7 @@ function CheckBoard(){
         }
     }
 
-    for(var sq64 = 0; sq64 < 64; sq64++){
+    for(let sq64 = 0; sq64 < 64; sq64++){
         sq120 = ToSQ120(sq64);
         pieceType = Board.pieces[sq120];
         shadowPieceCount[pieceType]++;

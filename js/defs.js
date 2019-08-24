@@ -146,7 +146,8 @@ var MAX_GAME_MOVES = 2048;
 var MAX_POSITION_MOVES = 256;
 var MAX_DEPTH = 64;
 
-var HistoryObject = function(move,castlePerm,enPas,fiftyMove,posKey){
+var HistoryObject = function(move,castlePerm,enPas,
+    fiftyMove,posKey){
     this.move = move;
     this.castlePerm = castlePerm;
     this.enPas = enPas;

@@ -25,7 +25,7 @@ function RunPerftTest(depth){
     console.log("i < " + Board.aiPlyStart[Board.aiPlyNo + 1]);
     console.log("aiPlyNo: " + Board.aiPlyNo);
 
-    for(var i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo + 1]; i++){
+    for(let i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo + 1]; i++){
         //debugger;
         move = Board.aiMoveList[i];
         var uwu = MakeMove(move);
@@ -56,7 +56,7 @@ function Perft(depth){
     GenerateMoves();
     var move;
 
-    for(var i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo+1]; i++){
+    for(let i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo+1]; i++){
         move = Board.aiMoveList[i];
         if(MakeMove(move)){
             Perft(depth-1);
