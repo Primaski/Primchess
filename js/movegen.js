@@ -81,11 +81,9 @@ function DeterminePawnMoves(){
         moveTo = moveFrom + forward;
         //non-attacking - directly forward
         if(Board.pieces[moveTo] == PIECES.NONE){
-            if(moveFrom == 81){ debugger; }
+            //if(moveFrom == 81){ debugger; }
             if(ranksBoard[moveFrom] == pawnDoubleMoveRank && 
                 Board.pieces[moveFrom + forward * 2] == PIECES.NONE){
-                    /* TO-DO: WHERE I LEFT OFF -> SHIFTED ADDQUIETMOVE TO ADDENPASSANT BUT UNEXPECTED INFLUX IN LEAF NODE COUNT */
-                    //AddEnPassantMove( MOVE(moveFrom, (moveFrom + forward*2), PIECES.NONE, PIECES.NONE, FLAG_ENPASSANT) );
                     AddQuietMove( MOVE(moveFrom, (moveFrom + forward * 2), PIECES.NONE, PIECES.NONE, FLAG_PAWNSTART));
                     //console.log("quiet move for " + GetFileRank(moveFrom) + " is possible");
             }
@@ -111,6 +109,11 @@ function DeterminePawnMoves(){
                     //console.log("pawn can capture from " + GetFileRank);
                 }
             }
+
+            if(attackMoveTo == Board.enPassant){
+                AddEnPassantMove( MOVE( moveFrom, attackMoveTo, PIECES.NONE, PIECES.NONE, FLAG_ENPASSANT ) );
+            }
+
         });
     });
 

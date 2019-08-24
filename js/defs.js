@@ -128,6 +128,17 @@ var FLAG_PAWNSTART = 0x80000;
 var FLAG_CASTLE = 0x1000000;
 var NOMOVE = 0;
 
+function PrintMoveInfo(move) { 
+    return GetFileRank(MoveFromSq(move)) + GetFileRank(MoveToSq(move));
+}
+
+function PrintAllMoves(ply){
+    let count = 0;
+    for(let i = Board.aiPlyStart[ply]; i < Board.aiPlyStart[ply+1]; i++, count++){
+        console.log(count + ": " + PrintMoveInfo(Board.aiMoveList[i]));
+    }
+}
+
 
 /*direction that pieces move relative to the 1D array that is the board*/
 var dirPawn = [9, 11];
@@ -170,7 +181,7 @@ function HASH_SIDE(){
     Board.posKey ^= sideKey;
 }
 function HASH_EN_PASSANT(){
-    Board.enPassant ^= pieceKeys[Board.enPassant];
+    Board.posKey ^= pieceKeys[Board.enPassant];
 }
 
 function Random32Bit(){

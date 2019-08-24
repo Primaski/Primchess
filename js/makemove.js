@@ -2,7 +2,6 @@ function MakeMove(move){
     var from = MoveFromSq(move);
     var to = MoveToSq(move);
     var side = Board.side;
-    var captured = MoveCaptured(move);
     var dir = (side == COLOR.WHITE)? -10 : 10;
 
     //special types of moves
@@ -67,9 +66,9 @@ function MakeMove(move){
 
     if(isPawn[Board.pieces[from]]){
         Board.halfMoveClock = 0;
-        if(from == 81){ debugger; }
-        if(MoveIsEnPassant(move)){
-            Board.enPassant = (from + dir);
+        //debugger;
+        if(MoveIsPawnStart(move)){
+            Board.enPassant = (from - dir);
         }
         HASH_EN_PASSANT();
     } 

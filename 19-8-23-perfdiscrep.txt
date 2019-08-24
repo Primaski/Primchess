@@ -133,7 +133,7 @@ RESULT: EN PASSANT NOT ACCOUNTED (W C. B)
 ________________________
 ________________________
 
-FIXED
+FIXED - EnPassant from FEN was incorrectly read
 
 recurse out
 
@@ -193,3 +193,65 @@ c8b7: 22 |
 Nodes searched: 447 (-2)
 
 PROBLEM: En Passant reads fine from FEN, but not in move determination.
+
+________________________
+________________________
+
+FIXED - Accidentally hashed EnPassant key instead of Poskey
+
+recurse out
+
+based c4b5
+(position fen  rnbqkbnr/p1pppppp/8/1P6/8/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1)
+go perft 2 ->
+a7a6: 23 |
+c7c6: 23 |
+d7d6: 22 |
+e7e6: 22 |
+f7f6: 22 |
+g7g6: 22 |
+h7h6: 22 |
+a7a5: 23 |
+c7c5: 23 |
+d7d5: 22 |
+e7e5: 22 |
+f7f5: 22 |
+g7g5: 22 |
+h7h5: 22 |
+b8a6: 23 |
+b8c6: 23 |
+g8f6: 22 |
+g8h6: 22 |
+c8a6: 23 |
+c8b7: 22 |
+
+Nodes searched: 447
+
+based b7b5
+(position fen rnbqkbnr/p1pppppp/8/1p6/2P5/8/PP1PPPPP/RNBQKBNR w KQkq - 0 1)
+go perft 3 ->
+a2a3: 481 |
+b2b3: 481 |
+d2d3: 656 |
+e2e3: 657 |
+f2f3: 480 |
+g2g3: 524 |
+h2h3: 480 |
+c4c5: 439 |
+a2a4: 544 |
+b2b4: 484 |
+d2d4: 678 |
+e2e4: 658 |
+f2f4: 503 |
+g2g4: 525 |
+h2h4: 524 |
+c4b5: 447 |
+b1a3: 503 |
+b1c3: 590 |
+g1f3: 546 |
+g1h3: 502 |
+d1c2: 654 |
+d1b3: 682 |
+d1a4: 653 |
+
+Nodes searched: 12691
