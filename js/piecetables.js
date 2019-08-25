@@ -1,6 +1,4 @@
-var PieceTable = [
-    PawnTable, KnightTable, BishopTable, RookTable
-];
+
 
 var PawnTable = [
     0	,	0	,	0	,	0	,	0	,	0	,	0	,	0	,
@@ -49,7 +47,9 @@ var RookTable = [
     
 var bishopPairBonus = 40;
     
-
+var PieceTable = [
+    PawnTable, KnightTable, BishopTable, RookTable
+];
 
 function MirrorT (index){
     if(index < 0 || index > 64){

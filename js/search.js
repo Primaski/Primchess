@@ -15,21 +15,23 @@ SEARCH.pending;
 2. Capturing Moves
 3. Killer Moves (for beta cutoffs)
 4. Frequently Visited Moves */
-function Minimax(depth,alpha,beta){
 
-}
-
-function PlainMinimax(depth, alpha, beta){   
+/* Some unexpected errors atm when calling Minimax from SearchPosition(), for example
+aiPlyNo >= 2 results in displayed of -infinity, and nodes searched does NOT take
+advantage of alpha-beta reductions (ex: depth 5 should display 230,531 leaf searches, but 
+instead displays over 5,000,000 < which also means too MANY leaf nodes are being accounted) - next part to fix.  */
+function Minimax(depth, alpha, beta){   
+    ++SEARCH.nodes;
     if(depth <= 0) return EVALPOS_Default();
 
     if(SEARCH.nodes & 0xFFF) IsTimeUp();
     if(IsMoveRepetition() || Board.halfMoveClock >= 100) return 0;
 
-    ++SEARCH.nodes;
-
     if(Board.aiPlyNo >= MAX_DEPTH){
         /* return evaluate */
     }
+    var inCheck = IsSquareAttacked(Board.indexByPieceType[PieceIndex(Kings[Board.side],0)],Board.side^1);
+    if(inCheck) ++depth; //not sure if i understand why?
     var score = -inf;
     GenerateMoves();
 
@@ -44,11 +46,11 @@ function PlainMinimax(depth, alpha, beta){
     var bestMove = NOMOVE;
     var currMove = NOMOVE;
 
-    for(let moveNo = Board.aiPlyStart[Board.aiPlyNo]; moveNo > Board.aiPlyStart[Board.aiPlyNo + 1]; moveNo++){
+    for(let moveNo = Board.aiPlyStart[Board.aiPlyNo]; moveNo < Board.aiPlyStart[Board.aiPlyNo + 1]; moveNo++){
         currMove = Board.aiMoveList[moveNo];
         if(MakeMove(currMove)){
             ++legal;
-            score = -PlainMinimax(depth-1, -alpha, -beta);
+            score = -Minimax(depth-1, -alpha, -beta);
             RevertLatestMove(currMove);
 
             if(SEARCH.stop) return 0;
@@ -65,25 +67,37 @@ function PlainMinimax(depth, alpha, beta){
                 alpha = score;
             }
         }
+        if(legal == 0){
+            /* checkmate or stalemate */
+            return (inCheck) ? (-CHECKMATE + Board.aiPlyNo) : 0;
+        }
         if(alpha != oldalpha){
-
+            StorePV(bestMove);
         }
     }
     return alpha;
 }
 
 function SearchPosition(){
+    debugger;
     var currBest = NOMOVE;
     var bestScore = -inf;
+    var line;
     
-    for(let currDepth = 1; currDepth <= SEARCH.depth; currDepth++){
-        if(!SEARCH.stop){
+    ClearForSearch();
 
+    for(let currDepth = 1; currDepth <= /*SEARCH.depth*/ 5; currDepth++){
+        if(!SEARCH.stop){
+            bestScore = Minimax(currDepth,-inf,inf);
+            bestMove = ProbePVTable();
+            line = "D:" + currDepth + " Best: " + PrintMove(bestMove)
+                + " Score: " + bestScore + " nodes: " + SEARCH.nodes;
+            console.log(line);
         }else{
             SEARCH.best = currBest;
             SEARCH.pending = false;
         }
-    }
+    } 
 }
 
 function IsTimeUp(){
@@ -105,4 +119,24 @@ function IsMoveRepetition(){
     /*note: i at (historyPly - halfMoveClock) instead of (historyPly) is a matter of efficiency -
     if the fifty move clock were reset, a pawn was moved, or a capture was made. both of these
     are irreversable moves, and thus cannot be repeated, reducing amount of array to search */
+}
+
+function ClearForSearch(){
+    for(let i = 0; i < 14 * NO_OF_SQUARES; i++){
+        Board.searchHistory[i] = 0;
+    }
+    for(let i = 0; i < 3 * MAX_DEPTH; i++){
+        Board.searchKillers[i] = 0;
+    }
+    ClearPVTable();
+    SEARCH.nodes = SEARCH.failHigh = SEARCH.failHighFirst = 0;
+    SEARCH.start = $.now();
+    SEARCH.stop = false;
+}
+
+function ClearPVTable(){
+    for(let i = 0; i < PV_COUNT; i++){
+        Board.pvTable[i].move = NOMOVE;
+        Board.pvTable[i].posKey = 0;
+    }
 }

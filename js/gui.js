@@ -10,4 +10,5 @@ $("#setFen").click(function () {
         return;
     }
     PrintBoard();
+    //SearchPosition();
 });

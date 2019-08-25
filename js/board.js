@@ -39,6 +39,8 @@ Board.aiMoveScores = []; //type: int, see movegen.js
 Board.aiPlyStart = []; //type: int, see movegen.js
 Board.pvTable = []; //size: 10,000
 Board.pvArray = []; //size: max_depth (best line at any depth)
+Board.searchHistory = []; //size: 14 * NO_OF_SQUARES
+Board.searchKillers = []; //size: 3 * MAX_DEPTH
 
 function GetPositionKey(){
     currPiece = PIECES.NONE;

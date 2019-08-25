@@ -25,6 +25,7 @@ function init(){
     hashkeysinit();
     sq120to64init();
     boardvarsinit();
+    PVinit();
 }
 
 function boardvarsinit(){

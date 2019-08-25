@@ -263,7 +263,7 @@ function DetermineCastleMoves(){
                 if(!IsSquareAttacked(KEYSQUARES.E1, COLOR.BLACK) &&
                    !IsSquareAttacked(KEYSQUARES.F1, COLOR.BLACK) &&
                    !IsSquareAttacked(KEYSQUARES.G1, COLOR.BLACK)){
-                    AddQuietMove( MOVE(SQUARES.E1, SQUARES.G1, PIECES.NONE, 
+                    AddQuietMove( MOVE(KEYSQUARES.E1, KEYSQUARES.G1, PIECES.NONE, 
                         PIECES.NONE, FLAG_CASTLE ) );
                 }
             } 
@@ -278,7 +278,7 @@ function DetermineCastleMoves(){
                 if(!IsSquareAttacked(KEYSQUARES.C1, COLOR.BLACK) &&
                    !IsSquareAttacked(KEYSQUARES.D1, COLOR.BLACK) &&
                    !IsSquareAttacked(KEYSQUARES.E1, COLOR.BLACK)){
-                    AddQuietMove( MOVE(SQUARES.E1, SQUARES.C1, PIECES.NONE, 
+                    AddQuietMove( MOVE(KEYSQUARES.E1, SQUARES.C1, PIECES.NONE, 
                         PIECES.NONE, FLAG_CASTLE ) );
                 }
             } 
