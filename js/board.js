@@ -32,10 +32,13 @@ Board.halfMoveClock = 0; //draw-> 50 moves w.o capture / pawn movement
 Board.enPassant = 0;
 Board.posKey = 0; //draw-> pos repeated 3 times
 
+//ai
 Board.aiPlyNo = 0;
 Board.aiMoveList = []; //type: move, see movegen.js
 Board.aiMoveScores = []; //type: int, see movegen.js
 Board.aiPlyStart = []; //type: int, see movegen.js
+Board.pvTable = []; //size: 10,000
+Board.pvArray = []; //size: max_depth (best line at any depth)
 
 function GetPositionKey(){
     currPiece = PIECES.NONE;

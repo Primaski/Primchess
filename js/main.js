@@ -28,7 +28,6 @@ function init(){
 }
 
 function boardvarsinit(){
-
     //initalize blank board history arr
     for(let i = 0; i < MAX_GAME_MOVES; i++){
         Board.history.push(new HistoryObject(NOMOVE,0,0,0,0));
@@ -98,5 +97,10 @@ function hashkeysinit(){
     for(let i = 0; i < 16; i++){
         castleKeys[i] = Random32Bit();
     }
+}
 
+function PVinit(){
+    for(let i = 0; i < PV_COUNT; i++){
+        Board.pvTable.push(new PVObject(NOMOVE,0));
+    }
 }

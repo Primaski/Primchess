@@ -12,6 +12,7 @@ var pieceVal = [
     100, 325, 325, 550, 1000, 50000,
     100, 325, 325, 550, 1000, 50000
 ];
+var CHECKMATE = 99999;
 var isPawn = [ false, true, false, false, false, false, false, true, false, false, false, false, false ];	
 var isKnight = [ false, false, true, false, false, false, false, false, true, false, false, false, false ];
 var isRook = [ false, false, false, false, true, false, false, false, false, false, true, false, false ];
@@ -150,6 +151,7 @@ var dirQueen = [-1, -9, -10, -11, 1, 9, 10, 11];
 var dirCountByPiece = [0, 0, 8, 4, 4, 8, 8, 0, 8, 4, 4, 8, 8]; //pawn set to 0 - not utiliz.
 
 /***** SPECIAL ATTRIBUTE INFO *****/
+var inf = Number.POSITIVE_INFINITY;
 var CASTLEBIT = {
     wk : 1, wq : 2, bk : 4, bq : 8
 }
@@ -166,6 +168,12 @@ var HistoryObject = function(move,castlePerm,enPas,
     this.posKey = posKey;
     return this;
 }; //used inside Board.history[]
+
+var PVObject = function(move,poskey){
+    this.move = move;
+    this.poskey = poskey;
+    return this;
+}; //used inside Board.PVTable
 
 //poskey gen:
 var sideKey; 
