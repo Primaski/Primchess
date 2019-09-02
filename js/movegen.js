@@ -278,7 +278,7 @@ function DetermineCastleMoves(){
                 if(!IsSquareAttacked(KEYSQUARES.C1, COLOR.BLACK) &&
                    !IsSquareAttacked(KEYSQUARES.D1, COLOR.BLACK) &&
                    !IsSquareAttacked(KEYSQUARES.E1, COLOR.BLACK)){
-                    AddQuietMove( MOVE(KEYSQUARES.E1, SQUARES.C1, PIECES.NONE, 
+                    AddQuietMove( MOVE(KEYSQUARES.E1, KEYSQUARES.C1, PIECES.NONE, 
                         PIECES.NONE, FLAG_CASTLE ) );
                 }
             } 
@@ -315,4 +315,20 @@ function DetermineCastleMoves(){
         }
     }
     return;
+}
+
+function MoveExists(move) {
+	GenerateMoves();
+	var moveFound = NOMOVE;
+	for(let i = Board.aiPlyStart[Board.aiPlyNo]; i < Board.aiPlyStart[Board.aiPlyNo + 1]; ++i) {
+		moveFound = Board.aiMoveList[i];	
+		if(!MakeMove(moveFound)) {
+			continue;
+		}				
+		RevertLatestMove();
+		if(move == moveFound) {
+			return true;
+		}
+	}
+	return false;
 }

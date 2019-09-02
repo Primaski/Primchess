@@ -11,5 +11,34 @@ function StorePV(move){
     Board.pvTable[i].move = move;
     Board.pvTable[i].posKey = Board.posKey;
 }
+/*
+function GetPVLine(depth){
+    var move = ProbePVTable();
+    for(var i = 0; (i < depth && move != NOMOVE); i++){
+        MakeMove(move);
+        Board.pvArray[i] = move;
+        move = ProbePVTable();
+    }
+    while(Board.ply > 0) RevertLatestMove();
+    return i;
+}
+ */
 
-/* TO-DO: LEFT OFF ON LESSON 46 */
+ function GetPVLine(depth){
+    //debugger;
+    var move = ProbePVTable();
+    var i = 0;
+    while(move != NOMOVE && i < depth){
+        if(MoveExists(move)){
+            MakeMove(move);
+            Board.pvArray[i++] = move;
+        }else{
+            break;
+        }
+        move = ProbePVTable();
+    }
+    while(Board.aiPlyNo > 0){
+        RevertLatestMove();
+    }
+    return i;
+ }

@@ -20,7 +20,7 @@ function PrintBoard(){
 
     console.log(line);
     console.log("side: " + SIDECHAR[Board.side]);
-    console.log("enpas: " + Board.enPassant);
+    console.log("enpas: " + GetFileRank(Board.enPassant));
     line = "";
 
     if(Board.castlePerm & CASTLEBIT.wk) { line += 'K'; }
