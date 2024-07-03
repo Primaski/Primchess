@@ -174,7 +174,8 @@ function ClearPVTable(){
 }
 
 function DetailMM(depth){
-    /*if(currDepth != SEARCH.depth){
+    /* base case
+    if(currDepth != SEARCH.depth){
         return;
     }*/
     PrintBoard();
